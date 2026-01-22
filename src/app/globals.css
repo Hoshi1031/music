@@ -1,0 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ncs-black: #000000;
+  --color-ncs-offwhite: #F8F9FA;
+  --color-ncs-red: #FF3E3E;
+  --color-ncs-text-primary: #111111;
+  --color-ncs-text-secondary: #666666;
+  
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+:root {
+  --background: #F8F9FA;
+  --foreground: #111111;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000; /* Sidebar dark by default, but content matches design */
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
