@@ -1,14 +1,17 @@
 "use client";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { ReleaseGrid } from "@/components/ReleaseGrid";
 import { releases } from "@/lib/mockData";
 
+type SortOrder = "newest" | "oldest" | "popular";
+
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("All Genres");
   const [selectedMood, setSelectedMood] = useState("All Moods");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("newest");
 
   // フィルタリングロジック
   const filteredReleases = releases.filter((release) => {
@@ -27,6 +30,24 @@ export default function Home() {
 
     return matchesSearch && matchesGenre && matchesMood;
   });
+
+  // ソートロジック
+  const sortedReleases = useMemo(() => {
+    const sorted = [...filteredReleases];
+    switch (sortOrder) {
+      case "newest":
+        // Default order (array order represents newest first)
+        return sorted;
+      case "oldest":
+        // Reverse order
+        return sorted.reverse();
+      case "popular":
+        // Sort by playCount descending
+        return sorted.sort((a, b) => (b.playCount || 0) - (a.playCount || 0));
+      default:
+        return sorted;
+    }
+  }, [filteredReleases, sortOrder]);
 
   return (
     <div className="flex flex-col">
@@ -61,7 +82,11 @@ export default function Home() {
         </div>
       </div>
 
-      <ReleaseGrid releases={filteredReleases} />
+      <ReleaseGrid
+        releases={sortedReleases}
+        sortOrder={sortOrder}
+        onSortChange={setSortOrder}
+      />
     </div>
   );
 }

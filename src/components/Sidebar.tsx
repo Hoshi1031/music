@@ -23,7 +23,7 @@ export default function Sidebar() {
         <aside className="w-[260px] bg-black text-white h-screen fixed left-0 top-0 hidden md:flex flex-col z-40 overflow-y-auto border-r border-gray-900">
             <div className="p-8">
                 <Link href="/" className="block mb-12">
-                    <h1 className="text-4xl font-bold tracking-tighter text-white">2AT</h1>
+                    <h1 className="text-4xl font-bold tracking-tighter bg-gradient-to-r from-white via-gray-100 to-gray-300 bg-clip-text text-transparent hover:from-[#FF3E3E] hover:to-[#FF6B6B] transition-all duration-300">2AT</h1>
                 </Link>
 
                 <nav className="space-y-2 mb-12">
